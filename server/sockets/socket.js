@@ -10,46 +10,20 @@ io.on('connection', (client) => {
         }
         let siguiente = ticketControl.siguienteTurno();
         console.log('El siguiente turno es el: ' + siguiente);
-        let resp = `Siguiente turno: ${siguiente}`;
-        client.broadcast.emit('siguienteTurnoAsignado', resp);
+        let resp = siguiente;
+        client.broadcast.emit('estadoActual', {
+            actual: resp
+        });
         callback(resp);
     });
 
-    /*
-        console.log('Usuario conectado');
-
-        client.emit('enviarMensaje', {
-            usuario: 'Administrador',
-            mensaje: 'Bienvenido a esta aplicación'
-        });
-
-
-
-        client.on('disconnect', () => {
-            console.log('Usuario desconectado');
-        });
-
-        // Escuchar el cliente
-        client.on('enviarMensaje', (data, callback) => {
-
-            console.log(data);
-
-            client.broadcast.emit('enviarMensaje', data);
-
-
-            // if (mensaje.usuario) {
-            //     callback({
-            //         resp: 'TODO SALIO BIEN!'
-            //     });
-
-            // } else {
-            //     callback({
-            //         resp: 'TODO SALIO MAL!!!!!!!!'
-            //     });
-            // }
-
-
-
-        });
-    */
+    // Emitir un evento 'estadoActual'
+    // Debe regresar:
+    //{
+    //  actual: ticketControl.getUltimoTurno()
+    //}
+    //client.broadcast.emit('estadoActual', { // No funciona con el navegador conectado más recientemente... ¿por qué?
+    client.emit('estadoActual', {
+        actual: ticketControl.getUltimoTurno()
+    });
 });

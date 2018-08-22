@@ -21,7 +21,7 @@ class TicketControl {
         return `Ticket ${this.ultimo}`;
     }
 
-    obtenerUltimoTurno() {
+    getUltimoTurno() {
         return `Ticket ${this.ultimo}`;
     }
 
