@@ -17,11 +17,11 @@ if (!searchParams.has('escritorio')) {
 }
 var ventanilla = searchParams.get('escritorio');
 var label = $('small'); // jQuery - Busca al elemento small para trabajar con él.
-console.log(ventanilla);
+//console.log(ventanilla);
 $('h1').text('Ventanilla ' + ventanilla); // jQuery - modifica el objeto h1
 $('button').on('click', function() {
     socket.emit('atenderTurno', { ventanilla: ventanilla }, function(resp) {
-        console.log(resp);
+        //console.log(resp);
         if (resp === 'No hay turnos pendientes') {
             alert(resp);
             label.text(resp);

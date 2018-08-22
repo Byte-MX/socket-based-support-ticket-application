@@ -9,7 +9,7 @@ io.on('connection', (client) => {
             console.log('Datos recibidos del cliente: ' + data);
         }
         let siguiente = ticketControl.siguienteTurno();
-        console.log('El siguiente turno es el: ' + siguiente);
+        //console.log('El siguiente turno es el: ' + siguiente);
         let resp = siguiente;
         client.broadcast.emit('estadoActual', {
             actual: resp
@@ -33,9 +33,8 @@ io.on('connection', (client) => {
         let atenderTicket = ticketControl.atenderTurno(data.ventanilla);
         callback(atenderTicket);
 
-        // Actualizar / notificar cambios en los Últimos 4
-        // Emitir ultimos4
-        client.broadcast.emit('ultimos4', {
+        // Actualizar / notificar cambios
+        client.broadcast.emit('estadoActual', {
             actual: ticketControl.getUltimoTurno(),
             ultimos4: ticketControl.getUltimos4()
         });

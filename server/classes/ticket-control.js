@@ -15,7 +15,7 @@ class TicketControl {
         this.ultimos4 = [];
 
         let data = require('../data/data.json');
-        console.log(data);
+        //console.log(data);
 
         if (data.hoy === this.hoy) {
             this.ultimo = data.ultimo;
@@ -62,8 +62,8 @@ class TicketControl {
             // Quitar el último
             this.ultimos4.splice(-1, 1); // Borra el último
         }
-        console.log('Últimos 4');
-        console.log(this.ultimos4);
+        //console.log('Últimos 4');
+        //console.log(this.ultimos4);
         this.grabarArchivo();
 
         return atenderTicket;

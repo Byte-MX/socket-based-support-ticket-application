@@ -21,11 +21,9 @@ socket.on('disconnect', function() {
     console.log('Se perdió la conexión con el servidor.');
 });
 socket.on('estadoActual', function(data) {
-    console.log(data);
-    actualizaHTML(data.ultimos4);
-});
-// on 'ultimos4'
-socket.on('ultimos4', function(data) {
+    //console.log(data);
+    var audio = new Audio('audio/new-ticket.mp3');
+    audio.play();
     actualizaHTML(data.ultimos4);
 });
 
@@ -33,6 +31,6 @@ function actualizaHTML(ultimos4) {
     for (var i = 0; i < (ultimos4.length); i++) {
         lblTurnos[i].text('Turno ' + ultimos4[i].numero);
         lblVentanillas[i].text('Ventanilla ' + ultimos4[i].ventanilla);
-        console.log('Turno ' + ultimos4[i].numero + ' en Ventanilla ' + ultimos4[i].ventanilla);
+        //console.log('Turno ' + ultimos4[i].numero + ' en Ventanilla ' + ultimos4[i].ventanilla);
     }
 }
