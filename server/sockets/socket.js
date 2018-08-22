@@ -17,13 +17,27 @@ io.on('connection', (client) => {
         callback(resp);
     });
 
-    // Emitir un evento 'estadoActual'
-    // Debe regresar:
-    //{
-    //  actual: ticketControl.getUltimoTurno()
-    //}
     //client.broadcast.emit('estadoActual', { // No funciona con el navegador conectado más recientemente... ¿por qué?
     client.emit('estadoActual', {
-        actual: ticketControl.getUltimoTurno()
+        actual: ticketControl.getUltimoTurno(),
+        ultimos4: ticketControl.getUltimos4()
+    });
+
+    client.on('atenderTurno', (data, callback) => {
+        if (!data.ventanilla) {
+            return callback({
+                err: true,
+                mensaje: 'Es necesario proporcionar el número de ventanilla.'
+            });
+        }
+        let atenderTicket = ticketControl.atenderTurno(data.ventanilla);
+        callback(atenderTicket);
+
+        // Actualizar / notificar cambios en los Últimos 4
+        // Emitir ultimos4
+        client.broadcast.emit('ultimos4', {
+            actual: ticketControl.getUltimoTurno(),
+            ultimos4: ticketControl.getUltimos4()
+        });
     });
 });

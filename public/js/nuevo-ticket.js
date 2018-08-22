@@ -1,5 +1,5 @@
 // Comando para establecer la conexión
-socket = io();
+var socket = io();
 var label = $('#lblNuevoTicket'); //jQuery - Hace referencia a esta etiqueta del HTML 
 
 // On es para escuchar sucesos.
